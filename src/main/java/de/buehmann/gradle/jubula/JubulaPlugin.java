@@ -30,7 +30,7 @@ public class JubulaPlugin implements Plugin<Project>, ProjectEvaluationListener 
 		final String toolkit = project.getExtensions().getByType(JubulaPluginExtension.class).getToolkit()
 				.toLowerCase();
 		final StringBuilder sb = new StringBuilder("org.eclipse.jubula:org.eclipse.jubula.toolkit.");
-		sb.append(toolkit).appen(".api:");
+		sb.append(toolkit).append(".api:");
 		if ("javafx".equals(toolkit)) {
 			sb.append("4.1.0");
 		} else {

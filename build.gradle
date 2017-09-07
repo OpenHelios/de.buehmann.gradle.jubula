@@ -6,20 +6,25 @@ apply plugin: 'maven'
 apply plugin: 'eclipse'
 
 group = 'de.buehmann.tools'
-version = '4.1.0'
+version = '4.1.1'
 
+def Properties properties = new Properties()
+properties.load(new FileInputStream(project.file('local.properties')))
+properties.each {
+	prop -> project.ext.set(prop.key, prop.value)
+}
 repositories {
 	jcenter()
 }
 
 pluginBundle {
-	website = 'https://github.com/OpenHelios/de.buehmann.gradle.jubula'
-	vcsUrl = 'https://github.com/OpenHelios/de.buehmann.gradle.jubula.git'
-	description = 'Jubula Java API Plugin for testing GUI applications using Swing, JavaFX, RCP'
-	tags = ['jubula', 'java', 'api', 'test', 'gui', 'swing', 'javafx', 'rcp']
+	website = project.getProperty('websiteUrl')
+	vcsUrl = project.getProperty('websiteUrl') + '.git'
+	description = 'Gradle plugin to execute GUI tests with the Jubula Java API for Swing or JavaFX applications.'
+	tags = ['jubula', 'java', 'api', 'test', 'gui', 'swing', 'javafx', 'rcp', 'junit']
 	plugins {
 		jubulaPlugin {
-			id = 'de.buehmann.gradle.jubula'
+			id = project.name
 			displayName = 'Jubula Java API Gradle Plugin'
 		}
 	}
